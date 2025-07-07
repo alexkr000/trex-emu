@@ -11,6 +11,7 @@ import (
 	"emu/version"
 	"errors"
 	"fmt"
+	"runtime"
 	"log"
 	"math/rand"
 	"os"
@@ -249,6 +250,19 @@ func RunCoreZmq(args *MainArgs) {
 	}
 }
 
+func captureStackTrace() {
+	buf := make([]byte, 1024*10) // Allocate a buffer for the stack trace
+	n := runtime.Stack(buf, true) // true captures all goroutines
+	fmt.Printf("Stack trace:\n%s\n", buf[:n])
+}
+
 func main() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered from panic:", r)
+			captureStackTrace()
+		}
+	}()
+
 	RunCoreZmq(parseMainArgs())
 }
