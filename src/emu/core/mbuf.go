@@ -42,7 +42,7 @@ const lMBUF_INVALID_PORT = 0xffff
 const lIND_ATTACHED_MBUF = 0x2
 
 //MAX_PACKET_SIZE the maximum packet size
-const MAX_PACKET_SIZE uint16 = 9 * 1024
+const MAX_PACKET_SIZE uint16 = 10 * 1024
 const MBUF_RX_POOL_SIZE = 2048 // pool used by rx size
 
 // MbufPoll cache of mbufs per packet size
